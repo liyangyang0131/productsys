@@ -46,16 +46,16 @@
                         </thead>
                         <tbody>
 
-                        <tr v-for="(item,index) in productList" :key="item._id">
+                        <tr v-for="(item,index) in productList" :key="item.id">
                             <td>{{index+1}}</td>
-                            <td>图标</td>
+                            <td>{{item.picture}}</td>
                             <td>{{item.title}}</td>
                             <td>{{item.price}}元</td>
                             <td>{{item.fee}}元</td>
                             <td class="text-center" style="cursor: pointer">
-                                <span>修改</span>
+                                <span @click="editBtn(item)">修改</span>
                                 <span style="margin:0 10px"></span>
-                                <span @click="delProduct(item._id)">删除</span>
+                                <span @click="delBtn(item.id)">删除</span>
                             </td>
                         </tr>
                         </tbody>
@@ -69,6 +69,7 @@
 
 <script>
     import Aslideleft from '../components/Aslideleft'
+    import {mapMutations} from 'vuex'
     export default {
         name: "product",
         components:{ Aslideleft },
@@ -81,19 +82,34 @@
             this.queryProducts();
         },
         methods:{
+            editBtn(el){
+                this.$router.push('/productedit');
+                this.setProductCon(el);
+            },
+            delBtn(id){
+                this.$confirm('此操作将永久删除该商品, 是否继续?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    this.delProduct(id);
+                })
+            },
             queryProducts(){
-                this.$http.get('/productList').then(res=>{
+                this.$http.get('/product/list').then(res=>{
                     var data = res.data;
                     this.productList = data.list;
                 }).catch(err=>{this.$message(err)})
             },
             delProduct(id){
-                this.$http.delete('/productDelete',{id:id}).then(res=>{
+                const params = {id}
+                this.$http.delete('/product/delete',{params}).then(res=>{
                     var data = res.data;
                     this.$message(data.message);
-
+                    this.queryProducts();
                 }).catch(err=>{this.$message(err)})
-            }
+            },
+            ...mapMutations(['setProductCon'])
         }
     }
 </script>

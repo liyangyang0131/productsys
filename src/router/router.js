@@ -28,7 +28,7 @@ const routes = [
     {
         path:'/productedit',
         components:{
-            default:()=>import ('../views/product'),
+            default:()=>import ('../views/productedit'),
             header:()=>import('../components/Header'),
         }
     }

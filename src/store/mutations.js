@@ -6,6 +6,10 @@ const mutations = {
     clear(state){
         state.userInfo = '';
         localStorage.userInfo = '';
+    },
+    setProductCon(state,el){
+        state.productCon = el;
+        localStorage.productCon = JSON.stringify(el);
     }
 }
 
