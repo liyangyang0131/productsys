@@ -4,6 +4,8 @@ import router from './router/router'
 import axios from './assets/api'
 import ElementUI from 'element-ui'
 import store from './store/index'
+import './utils/dialog'
+import './utils/loadMore'
 // 公共样式
 import 'element-ui/lib/theme-chalk/index.css'
 import './assets/css/index.css'

@@ -39,7 +39,8 @@
                     username:'',
                     password:''
                 },
-                username:''
+                username:'',
+                dialogVisible:true
             }
         },
         methods:{

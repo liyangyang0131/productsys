@@ -8,6 +8,14 @@ const routes = [
         redirect:'/login'
     },
     {
+        path:'/dialogDrag',
+        component:()=>import ('../views/dialogDrag'),
+    },
+    {
+        path:'/tableRollLoading',
+        component:()=>import ('../views/tableRollLoading'),
+    },
+    {
         path:'/login',
         component:()=>import ('../views/login')
     },
